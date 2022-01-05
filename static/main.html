@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button id="bt">send data</button>
+    <button id="bt2">all</button>
+    <script>
+
+        async function fetchPostAsync() {
+
+            const body = JSON.stringify({ login: "aaa", pass: "bbb" }) // body - dane
+            const headers = { "Content-Type": "application/json" } // nagłówek
+            let response = await fetch("/add", { method: "post", body, headers }) // fetch
+
+            if (!response.ok)
+                return response.status
+            else
+                return await response.json()
+
+        }
+
+        async function fetchPostAsync2() {
+
+            //const body = JSON.stringify({ login: "aaa", pass: "bbb" }) // body - dane
+            const headers = { "Content-Type": "application/json" } // nagłówek
+            let response = await fetch("/all", { method: "post", headers }) // fetch
+
+            if (!response.ok)
+                return response.status
+            else
+                return await response.json()
+
+        }
+
+
+
+        //btns
+
+        document.getElementById("bt").onclick = async function () {
+            let json = await fetchPostAsync()
+            console.log(json)
+        }
+
+        document.getElementById("bt2").onclick = async function () {
+            let json = await fetchPostAsync2()
+            console.log(json)
+        }
+
+    </script>
+
+</body>
+
+</html>
